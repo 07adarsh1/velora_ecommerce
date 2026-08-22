@@ -42,14 +42,19 @@ function setRefreshCookie(res, token) {
   res.cookie(REFRESH_COOKIE_NAME, token, {
     httpOnly: true,
     secure: env.isProd,
-    sameSite: 'strict',
-    path: '/api/auth',
+    sameSite: env.isProd ? 'none' : 'lax',
+    path: '/',
     maxAge: env.REFRESH_TOKEN_TTL_DAYS * 24 * 60 * 60 * 1000,
   });
 }
 
 function clearRefreshCookie(res) {
-  res.clearCookie(REFRESH_COOKIE_NAME, { path: '/api/auth' });
+  res.clearCookie(REFRESH_COOKIE_NAME, {
+    httpOnly: true,
+    secure: env.isProd,
+    sameSite: env.isProd ? 'none' : 'lax',
+    path: '/',
+  });
 }
 
 // ─── Registration / login ────────────────────────────────────────────────────
