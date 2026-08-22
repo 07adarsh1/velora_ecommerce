@@ -35,7 +35,6 @@ Features catalog browsing with multi-attribute filtering and debounced search, p
 
 ```
 ecommerce_platform/
-├── docs/                     # Design documentation & UI/UX PRDs
 ├── server/                   # Express REST API
 │   ├── src/
 │   │   ├── config/           # Environment validation (Zod), MongoDB connection, constants
