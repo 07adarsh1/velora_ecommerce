@@ -1,0 +1,129 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/fraunces";
+@import "tailwindcss";
+
+/* Design tokens (docs/ui-prd.md §3.2) — Tailwind v4 CSS-first theme. */
+@theme {
+  --color-canvas: #faf9f7;
+  --color-surface: #ffffff;
+  --color-ink: #1c1b1a;
+  --color-ink-soft: #6e6a65;
+  --color-line: #e8e5e0;
+  --color-accent: #0f5c4c;
+  --color-accent-hover: #0c4b3e;
+  --color-accent-soft: #edf5f2;
+  --color-sale: #b4432f;
+  --color-gold: #b08d57;
+  --color-success: #2e7d5b;
+  --color-warn: #b7791f;
+  --color-danger: #b4432f;
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+
+  --radius-input: 4px;
+  --radius-card: 10px;
+  --radius-media: 16px;
+}
+
+@layer base {
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+  }
+  ::selection {
+    background: var(--color-accent-soft);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+}
+
+/* Route transition — fade + slight rise (docs/ui-prd.md §3.4). */
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page-fade {
+  animation: fade-rise 220ms ease-out both;
+}
+
+/* Skeleton shimmer replaces the default pulse. */
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.skeleton-shimmer {
+  background: linear-gradient(100deg, var(--color-line) 40%, var(--color-canvas) 50%, var(--color-line) 60%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+/* Micro-label used across the chrome and section headers. */
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-ink-soft);
+}
+
+/* Drawer slide for the mobile nav. */
+@keyframes drawer-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.drawer-in {
+  animation: drawer-in 220ms ease-out both;
+}
+
+/* Right-side drawer for admin edit forms. */
+@keyframes drawer-right-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.drawer-right {
+  animation: drawer-right-in 240ms ease-out both;
+}
+
+/* Bottom sheet for mobile filters. */@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.sheet-up {
+  animation: sheet-up 260ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

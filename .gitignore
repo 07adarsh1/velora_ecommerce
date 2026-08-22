@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Environment secrets — never commit
+.env
+.env.local
+.env.*.local
+
+# Build output
+.next/
+out/
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Coverage
+coverage/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# mongodb-memory-server downloaded binaries
+.mongodb-binaries/
