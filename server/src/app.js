@@ -30,8 +30,19 @@ app.set('trust proxy', 1);
 app.use(helmet());
 app.use(
   cors({
-    // Explicit allow-list from env — never '*' with credentials (PRD §6.2/§17).
-    origin: env.CLIENT_ORIGIN,
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      const cleanOrigin = origin.replace(/\/+$/, '');
+      const allowed =
+        env.CLIENT_ORIGIN.some((o) => o.replace(/\/+$/, '') === cleanOrigin) ||
+        /\.vercel\.app$/.test(new URL(origin).hostname) ||
+        !env.isProd;
+
+      if (allowed) {
+        return callback(null, true);
+      }
+      return callback(new Error(`CORS origin not allowed: ${origin}`));
+    },
     credentials: true,
   })
 );
