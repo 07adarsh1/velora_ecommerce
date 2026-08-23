@@ -169,6 +169,10 @@ async function seed(options = {}) {
     // Sprinkle low-stock and out-of-stock cases for the admin dashboard.
     const topStock = rand() < 0.1 ? 0 : rand() < 0.2 ? randInt(1, 4) : randInt(10, 120);
 
+    const existing = await Product.findOne({ slug });
+    const hasCustomImages = !fresh && existing?.images?.length && !existing.images.every((i) => i.includes('picsum'));
+    const imagesToSet = hasCustomImages ? existing.images : [IMAGE(slug, 1), IMAGE(slug, 2), IMAGE(slug, 3)];
+
     const product = await Product.findOneAndUpdate(
       { slug },
       {
@@ -184,7 +188,7 @@ async function seed(options = {}) {
             'A favourite among our customers for its quality and finish.',
             'Compact, practical, and thoughtfully designed.',
           ])} Free delivery on eligible orders.`,
-          images: [IMAGE(slug, 1), IMAGE(slug, 2), IMAGE(slug, 3)],
+          images: imagesToSet,
           variants,
           stock: withVariants ? 0 : topStock,
           averageRating: 0,

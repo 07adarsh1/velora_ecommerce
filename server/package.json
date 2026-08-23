@@ -8,6 +8,7 @@
     "dev": "nodemon src/server.js",
     "dev:memory": "node src/scripts/dev-memory.js",
     "seed": "node src/scripts/seed.js",
+    "seed:images": "node src/scripts/set-product-images.js",
     "test": "jest --runInBand --forceExit",
     "test:coverage": "jest --runInBand --forceExit --coverage"
   },
