@@ -278,13 +278,13 @@ export function Price({ current, original, discountPercent, size = 'md', classNa
 /** 4:5 media frame with lazy Cloudinary-optimized image and hover zoom. */
 export function ProductMedia({ src, alt, ratio = 'aspect-[4/5]', eager = false, className = '', imgClassName = '' }) {
   return (
-    <div className={`${ratio} overflow-hidden rounded-card bg-line/40 ${className}`}>
+    <div className={`${ratio} overflow-hidden rounded-card bg-line/20 p-3 sm:p-4 flex items-center justify-center ${className}`}>
       {src ? (
         <img
           src={src}
           alt={alt}
           loading={eager ? 'eager' : 'lazy'}
-          className={`h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04] ${imgClassName}`}
+          className={`h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105 ${imgClassName}`}
         />
       ) : (
         <div className="flex h-full w-full items-center justify-center">

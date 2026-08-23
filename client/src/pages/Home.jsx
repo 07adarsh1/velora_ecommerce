@@ -1,11 +1,38 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { ArrowRight } from 'lucide-react';
+import {
+  ArrowRight,
+  Headphones,
+  Laptop,
+  Watch,
+  Sparkles,
+  Dumbbell,
+  BookOpen,
+  Gamepad2,
+  ShoppingBag,
+  Layers,
+} from 'lucide-react';
 import { productApi, categoryApi } from '../lib/api/endpoints';
 import { ProductCard, ProductCardSkeleton } from '../components/product/ProductCard';
 import { Button, EmptyState, ErrorState, SectionHeader } from '../components/ui';
 import { cimg } from '../lib/utils/image';
+
+const CATEGORY_ICONS = {
+  audio: Headphones,
+  electronics: Laptop,
+  wearables: Watch,
+  'home-kitchen': Sparkles,
+  fitness: Dumbbell,
+  books: BookOpen,
+  gaming: Gamepad2,
+  accessories: ShoppingBag,
+};
+
+function getCategoryIcon(slug = '', name = '') {
+  const key = (slug || name.toLowerCase().replace(/[^a-z0-9]+/g, '-')).toLowerCase();
+  return CATEGORY_ICONS[key] || Layers;
+}
 
 /** Subtle transform-only parallax for the hero media (docs/ui-prd.md §4.2). */
 function useParallax() {
@@ -43,18 +70,6 @@ export default function Home() {
     queryFn: () => categoryApi.list().then((r) => r.data),
   });
 
-  // One representative image per category for the circular rail.
-  const { data: allProducts } = useQuery({
-    queryKey: ['products', 'for-categories'],
-    queryFn: () => productApi.list({ limit: 100 }).then((r) => r.data),
-  });
-
-  const imageByCategory = {};
-  for (const p of allProducts || []) {
-    const catId = typeof p.category === 'object' ? p.category._id : p.category;
-    if (catId && !imageByCategory[catId] && p.images?.[0]) imageByCategory[catId] = p.images[0];
-  }
-
   const hero = featured?.find((p) => p.images?.[0]);
   const editorial = featured?.find((p) => p.images?.[0] && p !== hero);
 
@@ -87,17 +102,18 @@ export default function Home() {
           <div className="relative">
             <Link
               to={`/products/${hero.slug}`}
-              className="group block overflow-hidden rounded-media border border-line"
+              className="group block overflow-hidden rounded-media border border-line bg-surface transition-shadow duration-200 hover:shadow-[0_12px_32px_rgba(28,27,26,0.08)]"
               aria-label={`Featured: ${hero.name}`}
             >
-              <img
-                src={cimg(hero.images[0], { w: 900 })}
-                alt={hero.name}
-                fetchPriority="high"
-                style={{ transform: `translateY(${parallax}px)` }}
-                className="aspect-[4/5] w-full scale-[1.06] object-cover transition-transform duration-300 group-hover:scale-[1.1] sm:aspect-[5/4]"
-              />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent p-5 pt-16">
+              <div className="relative aspect-[4/5] w-full overflow-hidden bg-line/20 p-6 sm:aspect-[5/4] sm:p-10 flex items-center justify-center">
+                <img
+                  src={cimg(hero.images[0], { w: 900 })}
+                  alt={hero.name}
+                  fetchPriority="high"
+                  className="max-h-full max-w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 via-ink/40 to-transparent p-5 pt-16">
                 <p className="eyebrow !text-white/80">Featured</p>
                 <p className="mt-1 font-display text-lg font-medium text-white">{hero.name}</p>
               </div>
@@ -109,33 +125,33 @@ export default function Home() {
       {/* Category rail */}
       {categories && categories.length > 0 && (
         <section aria-label="Shop by category">
-          <SectionHeader eyebrow="Browse" title="Shop by category" />
-          <div className="-mx-4 flex snap-x gap-6 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0 [scrollbar-width:thin]">
-            {categories.map((c) => (
-              <Link
-                key={c._id}
-                to={`/products?category=${c.slug}`}
-                className="group flex w-20 shrink-0 snap-start flex-col items-center gap-2"
-              >
-                <span className="h-20 w-20 overflow-hidden rounded-full border border-line bg-line/40 transition-shadow group-hover:shadow-[0_8px_20px_rgba(28,27,26,0.12)]">
-                  {imageByCategory[c._id] ? (
-                    <img
-                      src={cimg(imageByCategory[c._id], { w: 160, h: 160 })}
-                      alt={c.name}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  ) : (
-                    <span className="flex h-full w-full items-center justify-center font-display text-xl text-ink-soft">
-                      {c.name[0]}
-                    </span>
-                  )}
-                </span>
-                <span className="text-center text-xs font-medium text-ink-soft transition-colors group-hover:text-accent">
-                  {c.name}
-                </span>
+          <SectionHeader
+            eyebrow="Browse"
+            title="Shop by category"
+            action={
+              <Link to="/products" className="text-sm font-medium text-accent hover:text-accent-hover">
+                All categories →
               </Link>
-            ))}
+            }
+          />
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+            {categories.map((c) => {
+              const Icon = getCategoryIcon(c.slug, c.name);
+              return (
+                <Link
+                  key={c._id}
+                  to={`/products?category=${c.slug}`}
+                  className="group flex flex-col items-center justify-center gap-3 rounded-card border border-line bg-surface p-4 text-center transition-all duration-200 hover:-translate-y-1 hover:border-accent hover:shadow-[0_8px_24px_rgba(28,27,26,0.06)]"
+                >
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent-soft text-accent transition-all duration-200 group-hover:scale-110 group-hover:bg-accent group-hover:text-white">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span className="text-xs font-medium tracking-tight text-ink transition-colors group-hover:text-accent">
+                    {c.name}
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}
@@ -173,12 +189,12 @@ export default function Home() {
       {/* Editorial strip */}
       {editorial && (
         <section className="grid items-stretch gap-0 overflow-hidden rounded-media border border-line bg-surface md:grid-cols-2">
-          <div className="relative min-h-64">
+          <div className="relative flex min-h-64 items-center justify-center bg-line/20 p-8 sm:p-12">
             <img
               src={cimg(editorial.images[0], { w: 1000 })}
               alt={editorial.name}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="max-h-72 w-full object-contain transition-transform duration-300 hover:scale-105"
             />
           </div>
           <div className="flex flex-col justify-center p-8 sm:p-12">

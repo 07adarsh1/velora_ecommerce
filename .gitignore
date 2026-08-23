@@ -27,3 +27,6 @@ Thumbs.db
 
 # mongodb-memory-server downloaded binaries
 .mongodb-binaries/
+
+# Local product image assets
+product-images/

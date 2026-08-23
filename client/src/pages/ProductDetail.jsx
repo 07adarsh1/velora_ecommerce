@@ -191,13 +191,13 @@ export default function ProductDetail() {
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
         {/* Gallery */}
         <div className="space-y-3">
-          <div key={selectedImage} className="page-fade overflow-hidden rounded-media border border-line bg-line/30">
+          <div key={selectedImage} className="page-fade overflow-hidden rounded-media border border-line bg-line/20 p-6 sm:p-10 flex items-center justify-center">
             {product.images?.[selectedImage] ? (
               <img
                 src={cimg(product.images[selectedImage], { w: 1000 })}
                 alt={`${product.name} — image ${selectedImage + 1}`}
                 fetchPriority="high"
-                className="aspect-square w-full object-cover"
+                className="aspect-square max-h-[500px] w-full object-contain"
               />
             ) : (
               <div className="flex aspect-square items-center justify-center text-sm text-ink-soft">No image</div>
@@ -211,11 +211,11 @@ export default function ProductDetail() {
                   onClick={() => setSelectedImage(i)}
                   aria-label={`Show image ${i + 1}`}
                   aria-current={i === selectedImage}
-                  className={`h-20 w-20 overflow-hidden rounded-card border transition-all ${
+                  className={`h-20 w-20 overflow-hidden rounded-card border bg-line/20 p-2 flex items-center justify-center transition-all ${
                     i === selectedImage ? 'border-accent ring-1 ring-accent' : 'border-line hover:border-ink-soft/40'
                   }`}
                 >
-                  <img src={cimg(img, { w: 160 })} alt="" loading="lazy" className="h-full w-full object-cover" />
+                  <img src={cimg(img, { w: 160 })} alt="" loading="lazy" className="h-full w-full object-contain" />
                 </button>
               ))}
             </div>
