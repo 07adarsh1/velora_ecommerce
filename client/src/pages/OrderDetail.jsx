@@ -110,7 +110,7 @@ export default function OrderDetail() {
             key: intent.keyId,
             amount: intent.amount,
             currency: intent.currency,
-            name: 'ShelfLife',
+            name: 'Velora',
             order_id: intent.gatewayOrderId,
             handler: async (response) => {
               try {

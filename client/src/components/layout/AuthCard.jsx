@@ -5,7 +5,7 @@ export function AuthCard({ title, subtitle, children }) {
   return (
     <div className="mx-auto flex max-w-md flex-col items-center py-6">
       <Link to="/" className="font-display text-xl font-semibold tracking-tight text-ink">
-        Shelf<span className="text-accent">Life</span>
+        Vel<span className="text-accent">ora</span>
       </Link>
       <div className="mt-6 w-full rounded-card border border-line bg-surface p-6 sm:p-8">
         <h1 className="font-display text-2xl font-semibold tracking-tight text-ink">{title}</h1>

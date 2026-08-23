@@ -77,7 +77,7 @@ function Navbar() {
               <Menu className="h-5 w-5" />
             </button>
             <Link to="/" className="font-display text-xl font-semibold tracking-tight text-ink">
-              Shelf<span className="text-accent">Life</span>
+              Vel<span className="text-accent">ora</span>
             </Link>
             <nav className="hidden items-center gap-6 md:flex" aria-label="Main">
               <NavLink to="/products" className={linkClass}>
@@ -141,7 +141,7 @@ function Navbar() {
           <div ref={drawerRef} className="drawer-in fixed inset-y-0 left-0 flex w-[300px] max-w-[85vw] flex-col bg-surface shadow-2xl">
             <div className="flex h-[72px] items-center justify-between border-b border-line px-4">
               <span className="font-display text-xl font-semibold">
-                Shelf<span className="text-accent">Life</span>
+                Vel<span className="text-accent">ora</span>
               </span>
               <button className={iconLinkClass} onClick={() => setDrawerOpen(false)} aria-label="Close menu">
                 <X className="h-5 w-5" />

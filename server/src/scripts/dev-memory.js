@@ -11,7 +11,7 @@ const { MongoMemoryReplSet } = require('mongodb-memory-server');
  */
 async function main() {
   const replSet = await MongoMemoryReplSet.create({ replSet: { count: 1 } });
-  const uri = replSet.getUri('shelflife');
+  const uri = replSet.getUri('velora');
   process.env.MONGODB_URI = uri;
 
   const { connectDB } = require('../config/db');
@@ -26,7 +26,7 @@ async function main() {
 
   const app = require('../app');
   const port = parseInt(process.env.PORT, 10) || 5000;
-  app.listen(port, () => logger.info({ port }, `ShelfLife API (dev:memory) listening on http://localhost:${port}`));
+  app.listen(port, () => logger.info({ port }, `Velora API (dev:memory) listening on http://localhost:${port}`));
 }
 
 main().catch((err) => {

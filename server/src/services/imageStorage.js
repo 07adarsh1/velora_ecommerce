@@ -23,7 +23,7 @@ async function upload(buffer, originalName) {
   }
 
   const timestamp = Math.floor(Date.now() / 1000);
-  const folder = 'shelflife/products';
+  const folder = 'velora/products';
   const signature = crypto
     .createHash('sha1')
     .update(`folder=${folder}&timestamp=${timestamp}${env.CLOUDINARY_API_SECRET}`)

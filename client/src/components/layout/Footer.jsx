@@ -6,7 +6,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div>
           <p className="font-display text-lg font-semibold">
-            Shelf<span className="text-accent">Life</span>
+            Vel<span className="text-accent">ora</span>
           </p>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink-soft">
             A production-grade e-commerce experience — real payments, live inventory, and every order tracked end to end.
@@ -32,7 +32,7 @@ export function Footer() {
       </div>
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-ink-soft sm:flex-row sm:px-6">
-          <p>© {new Date().getFullYear()} ShelfLife — portfolio project.</p>
+          <p>© {new Date().getFullYear()} Velora — portfolio project.</p>
           <p className="tracking-wide">Payments run in sandbox / test mode · Signature-verified checkout</p>
         </div>
       </div>

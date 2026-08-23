@@ -1,7 +1,7 @@
 {
-  "name": "shelflife-server",
+  "name": "velora-server",
   "version": "1.0.0",
-  "description": "ShelfLife e-commerce API — Express + MongoDB (layered monolith: routes → controllers → services → models)",
+  "description": "Velora e-commerce API — Express + MongoDB (layered monolith: routes → controllers → services → models)",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

@@ -88,7 +88,7 @@ npm run dev
 npm run seed -- --fresh
 
 # Default Admin Credentials:
-# Email: admin@shelflife.dev
+# Email: admin@velora.dev
 # Password: ChangeMe123!
 ```
 

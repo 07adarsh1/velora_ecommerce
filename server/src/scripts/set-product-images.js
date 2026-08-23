@@ -22,7 +22,7 @@ const imageStorage = require('../services/imageStorage');
 function resolveDirectUri(uri) {
   const m = uri.match(/^mongodb\+srv:\/\/([^:]+):([^@]+)@([^/?]+)(?:\/([^?]*))?/);
   if (!m) return uri;
-  const [, user, pass, srvHost, dbName = 'shelflife'] = m;
+  const [, user, pass, srvHost, dbName = 'velora'] = m;
   try {
     const { execSync } = require('child_process');
     const out = execSync(`nslookup -type=SRV _mongodb._tcp.${srvHost}`, { encoding: 'utf8' });
@@ -34,7 +34,7 @@ function resolveDirectUri(uri) {
   }
 }
 
-const UA = { 'User-Agent': 'ShelfLifeImageSeeder/1.0 (portfolio project)' };
+const UA = { 'User-Agent': 'VeloraImageSeeder/1.0 (portfolio project)' };
 
 // Fictional seed brands carry no search signal — strip them.
 const FICTIONAL_BRANDS = [

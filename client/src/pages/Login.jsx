@@ -50,7 +50,7 @@ export default function Login() {
   };
 
   return (
-    <AuthCard title="Log in" subtitle="Welcome back to ShelfLife.">
+    <AuthCard title="Log in" subtitle="Welcome back to Velora.">
       <form onSubmit={onSubmit} className="space-y-4">
         <Input label="Email" name="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
         <Input

@@ -125,7 +125,7 @@ export default function Checkout() {
           key: intent.keyId,
           amount: intent.amount,
           currency: intent.currency,
-          name: 'ShelfLife',
+          name: 'Velora',
           description: `Order ${intent.orderNumber}`,
           order_id: intent.gatewayOrderId,
           handler: async (response) => {

@@ -1,5 +1,5 @@
 // Guest cart persisted in localStorage — merged into the server cart on login.
-const KEY = 'shelflife_guest_cart';
+const KEY = 'velora_guest_cart';
 
 export const guestCart = {
   load() {

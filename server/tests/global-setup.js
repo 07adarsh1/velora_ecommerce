@@ -9,7 +9,7 @@ const { MongoMemoryReplSet } = require('mongodb-memory-server');
  */
 module.exports = async () => {
   const replSet = await MongoMemoryReplSet.create({ replSet: { count: 1 } });
-  const uri = replSet.getUri('shelflife_test');
+  const uri = replSet.getUri('velora_test');
   global.__MONGOD_REPLSET__ = replSet;
   fs.writeFileSync(path.join(__dirname, '.mongo-uri.json'), JSON.stringify({ uri }));
 };

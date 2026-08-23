@@ -6,7 +6,7 @@ const logger = require('./utils/logger');
 async function main() {
   await connectDB();
   const server = app.listen(env.PORT, () => {
-    logger.info({ port: env.PORT, env: env.NODE_ENV }, 'ShelfLife API listening');
+    logger.info({ port: env.PORT, env: env.NODE_ENV }, 'Velora API listening');
   });
 
   const shutdown = async (signal) => {

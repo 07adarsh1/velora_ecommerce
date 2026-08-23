@@ -32,7 +32,7 @@ const envSchema = z
       .default(false)
       .transform((v) => v === true || v === 'true'),
     ADMIN_NAME: z.string().default('Admin'),
-    ADMIN_EMAIL: z.string().email().default('admin@shelflife.dev'),
+    ADMIN_EMAIL: z.string().email().default('admin@velora.dev'),
     ADMIN_PASSWORD: z.string().min(8).default('ChangeMe123!'),
     LOG_LEVEL: z.enum(['fatal', 'error', 'warn', 'info', 'debug', 'trace']).default('info'),
   })

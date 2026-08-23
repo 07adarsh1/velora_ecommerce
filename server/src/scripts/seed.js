@@ -116,7 +116,7 @@ async function seed(options = {}) {
 
   const demoCustomers = [];
   for (let i = 1; i <= 5; i++) {
-    const email = `customer${i}@shelflife.dev`;
+    const email = `customer${i}@velora.dev`;
     const existing = await User.findOne({ email });
     if (existing) {
       demoCustomers.push(existing);

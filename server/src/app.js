@@ -68,7 +68,7 @@ app.use(cookieParser());
 
 app.use(generalLimiter);
 
-app.get('/', (_req, res) => res.json({ success: true, data: { name: 'ShelfLife API', version: '1.0.0' } }));
+app.get('/', (_req, res) => res.json({ success: true, data: { name: 'Velora API', version: '1.0.0' } }));
 app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
